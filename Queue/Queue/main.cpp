@@ -26,8 +26,8 @@ int main()
 			else if(in == "pop")	q.pop();
 			else if(in == "print")	q.print();
 			else if(in == "exit")	break;
-			else if(in == "front")	q.front();
-			else if(in == "rear")	q.rear();
+			else if(in == "front")	cout << q.front() <<endl;
+			else if(in == "rear")	cout << q.rear() <<endl;
 			else					cerr << "Invalid Input" << endl;
 		}
 		catch (const overflow_error& e) { cerr << e.what() << endl; }
