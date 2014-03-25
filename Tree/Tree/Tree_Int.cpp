@@ -3,6 +3,11 @@
 /**********************************************************************************************************************************/
 void Tree_Int::insertHelper(Node* node, int value)
 {
+	if(value == node->get_data())
+	{
+		cout << "Data already exists in the tree." << endl;
+		return;
+	}
 	if(value < node->get_data())
 	{
 		if(node->get_left_ptr() == NULL)
