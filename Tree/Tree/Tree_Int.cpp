@@ -91,7 +91,8 @@ void Tree_Int::preorder (Node* node, ostream& out)
 }
 
 /**********************************************************************************************************************************/
-void Tree_Int::levelorder(Node* node, ostream& out)
+void Tree_Int::levelorder (ostream& out){ levelorder(get_root()), out<<endl;	}
+void Tree_Int::levelorder (Node* node, ostream& out)
 {
 	if(empty()) return;
 	else if(node == NULL) return;
@@ -342,6 +343,11 @@ bool Tree_Int::is_leaf(int value)
 }
 
 /**********************************************************************************************************************************/
+bool Tree_Int::delete_node(int value)
+{
+	Node* node = search(value);
+	return delete_node(node);
+}
 bool Tree_Int::delete_node(Node* node)
 {
 	if(node == NULL) return false;
