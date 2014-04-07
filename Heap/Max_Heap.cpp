@@ -6,7 +6,7 @@ using std::swap;
 using std::floor;
 using std::setw;
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 bool Max_Heap<T>::is_heap(
 		typename vector<T>::iterator first,
@@ -34,7 +34,7 @@ bool Max_Heap<T>::is_heap(
 	return true;
 }
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 Max_Heap<T>::Max_Heap(
 		typename vector<T>::iterator v_begin,
@@ -58,7 +58,7 @@ Max_Heap<T>::Max_Heap(
 	make_heap();
 }
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 Max_Heap<T>::Max_Heap(vector<T> v)
 {
@@ -76,7 +76,7 @@ Max_Heap<T>::Max_Heap(vector<T> v)
 	make_heap();
 }
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 void Max_Heap<T>::make_heap()
 {
@@ -89,7 +89,7 @@ void Max_Heap<T>::make_heap()
 	}
 }
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 void Max_Heap<T>::heapify_down(size_t index)
 {
@@ -115,7 +115,7 @@ void Max_Heap<T>::heapify_down(size_t index)
 	}
 }
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 void Max_Heap<T>::heapify_up(size_t index)
 {
@@ -129,7 +129,7 @@ void Max_Heap<T>::heapify_up(size_t index)
 	}
 }
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 void Max_Heap<T>::levelorder(ostream& out) const
 {
@@ -140,7 +140,7 @@ void Max_Heap<T>::levelorder(ostream& out) const
 	out << endl;
 }
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 void Max_Heap<T>::push_heap(T value)
 {
@@ -150,7 +150,7 @@ void Max_Heap<T>::push_heap(T value)
 	return;
 }
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 void Max_Heap<T>::pop_heap()
 {
@@ -169,6 +169,86 @@ void Max_Heap<T>::pop_heap()
 	}
 }
 
-/************************************************************************/
+/********************************************************************************/
 template <class T>
 void Max_Heap<T>::print(ostream& out)
+{
+	out<<endl;
+
+	size_t h = height();
+
+	vector<size_t> spaces;
+	spaces.push_back(0);
+	for(size_t i = 0; i<= h; i++)
+	{
+		spaces.push_back( (spaces[i] + 1) * 2);
+	}
+	reverse(spaces.begin(), spaces.end());
+	for(size_t i = 0; i < spaces.size(); i++)
+	{
+		out << spaces[i] << " ";
+	}
+	out << endl;
+
+	size_t counter = 1;
+	for(size_t i = 0; i <= h; i++)					/* No of Levels */
+	{
+		for(size_t k = 0; k < pow(2.0, i*1.0); k++) /* No of nodes on a level */
+		{
+			if(counter > heap_size) break;
+			/* Spaces before printing node */
+			for(size_t j = 0; j < spaces[i]; j++)
+			{
+				out << ' ';
+			}
+			/* Printing the node */
+			out << setw(3) << data[counter++];
+			/* Spaces after the node */
+			for(size_t j = 0; j < spaces[i]; j++)
+			{
+				out << ' ';
+			}
+		}
+		/* Next line */
+		out << endl;
+
+		if(counter > heap_size) break;
+
+		/* Printing arrows */
+		size_t count1 = spaces[i], count2 = 0, count3 = 1;
+		for(size_t j = 0; j < spaces[i]/2; j++)			/* No of lines */
+		{
+			for(size_t k = 0; k < pow(2.0, i*1.0); k++) /* No of arrows */
+			{
+				/* Spaces before the arrow */
+				for(size_t l = 0; l < count1 - count3; l++)
+				{
+					out << ' ';
+				}
+				/* Left arrow */
+				out << "/";
+				/* Space between left and right arrow */
+				for(size_t l = 0; l < 3 + count2; l++)
+				{
+					out << ' ';
+				}
+				/* Right arrow */
+				out << "\\";
+				/* Spaces after right arrow */
+				for(size_t l = 0; l < count1 - count3; l++)
+				{
+					out << ' ';
+				}
+				out << " ";
+			}
+			out << endl;
+			count2 += 2;
+			count3++;
+		}
+	}
+	out << endl;
+}
+			}
+		}
+	}
+}
